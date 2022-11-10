@@ -5,68 +5,49 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public final class StringSchema {
-    private String string;
+public final class StringSchema extends BaseSchema<String> {
+    private final List<Predicate<Object>> validationsString = new ArrayList<>();
 
-    private boolean requiredMode = false;
-    private final List<Predicate<String>> validations = new ArrayList<>();
+    public List<Predicate<Object>> getValidationsString() {
+        return validationsString;
+    }
 
     public StringSchema() {
     }
 
-    public String getString() {
-        return string;
-    }
-
-    public void setString(String newString) {
-        this.string = newString;
-    }
-
-    public boolean isRequiredMode() {
-        return requiredMode;
-    }
-
-    public void setRequiredMode(boolean newRequiredMode) {
-        this.requiredMode = newRequiredMode;
-    }
-
-    public List<Predicate<String>> getValidations() {
-        return validations;
-    }
-
-    public boolean isValid(String content) {
-        setString(content);
-        if (!isRequiredMode()) {
-            return true;
-        }
-        isNullOrEmpty();
-        for (Predicate<String> validation : getValidations()) {
-            if (!validation.test(getString())) {
-                return false;
+    @Override
+    public boolean isValid(Object string) {
+        if (isRequiredMode()) {
+            buildValidationsString();
+            for (Predicate<Object> validationString : getValidationsString()) {
+                if (!validationString.test(string)) {
+                    return false;
+                }
             }
+            return super.isValid(string);
         }
         return true;
     }
 
     public StringSchema contains(String str) {
-        Predicate<String> containsStr = content -> content.contains(str);
+        Predicate<Object> containsStr = content -> String.valueOf(content).contains(str);
         validations.add(containsStr);
         return this;
     }
 
-    public void required() {
-        setRequiredMode(true);
-    }
-
-    public void minLength(int length) {
-        Predicate<String> minLength = content -> content.length() >= length;
+    public StringSchema minLength(int length) {
+        Predicate<Object> minLength = content -> String.valueOf(content).length() >= length;
         validations.add(minLength);
+        return this;
     }
 
-    private void isNullOrEmpty() {
-        Predicate<String> notNull = Objects::nonNull;
-        Predicate<String> notEmpty = content -> !content.equals("");
-        validations.add(notNull);
-        validations.add(notEmpty);
+    public void buildValidationsString() {
+        Predicate<Object> notNull = Objects::nonNull;
+        Predicate<Object> notEmpty = content -> !Objects.equals(content, "");
+        Predicate<Object> isString = content -> content instanceof String;
+        validationsString.add(notNull);
+        validationsString.add(notEmpty);
+        validationsString.add(isString);
     }
+
 }

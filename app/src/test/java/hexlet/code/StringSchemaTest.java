@@ -3,8 +3,7 @@ package hexlet.code;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-public class BaseSchemaTest {
-
+public class StringSchemaTest {
 
     @Test
     public void stringSchemaTest() {
@@ -18,7 +17,9 @@ public class BaseSchemaTest {
         Assertions.assertTrue(schema.isValid("what does the fox say"));
         Assertions.assertTrue(schema.isValid("hexlet"));
         Assertions.assertFalse(schema.isValid(null));
+        Assertions.assertFalse(schema.isValid(2));
         Assertions.assertFalse(schema.isValid(""));
+        Assertions.assertTrue(schema.minLength(2).isValid("java"));
 
         Assertions.assertTrue(schema.contains("wh").isValid("what does the fox say"));
         Assertions.assertTrue(schema.contains("what").isValid("what does the fox say"));
@@ -26,4 +27,6 @@ public class BaseSchemaTest {
 
         Assertions.assertFalse(schema.isValid("what does the fox say"));
     }
+
+
 }

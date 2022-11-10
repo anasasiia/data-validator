@@ -1,9 +1,17 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'jacoco'
+    id 'com.adarshr.test-logger' version '3.2.0'
 }
 
 group 'hexlet.code'
 version '1.0-SNAPSHOT'
+
+application  {
+    mainClass = 'hexlet.code.App'
+}
 
 repositories {
     mavenCentral()
@@ -12,6 +20,7 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    implementation 'com.puppycrawl.tools:checkstyle:10.4'
 }
 
 test {
@@ -20,4 +29,43 @@ test {
 
 compileJava {
     options.release = 17
+}
+
+checkstyle {
+    toolVersion '10.3.4'
+    configFile file("config/checkstyle/checkstyle.xml")
+}
+
+checkstyleMain {
+    source ='src/main/java'
+}
+
+checkstyleTest {
+    source ='src/test/java'
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
+testlogger {
+    theme 'standard'
+    showExceptions true
+    showStackTraces true
+    showFullStackTraces false
+    showCauses true
+    slowThreshold 2000
+    showSummary true
+    showSimpleNames false
+    showPassed true
+    showSkipped true
+    showFailed true
+    showOnlySlow false
+    showStandardStreams false
+    showPassedStandardStreams true
+    showSkippedStandardStreams true
+    showFailedStandardStreams true
+    logLevel 'lifecycle'
 }

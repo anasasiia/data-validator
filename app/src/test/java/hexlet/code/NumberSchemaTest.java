@@ -4,6 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class NumberSchemaTest {
+    private final Integer number10 = 10;
+    private final Integer number5 = 5;
+    private final Integer numberMinus10 = -10;
+    private final Integer number6 = 6;
+    private final Integer number4 = 4;
+    private final Integer number11 = 11;
 
     @Test
     public void numberSchemaTest() {
@@ -14,24 +20,18 @@ public class NumberSchemaTest {
         schema.required();
 
         Assertions.assertFalse(schema.isValid(null));
-        Integer number_10 = 10;
-        Assertions.assertTrue(schema.isValid(number_10));
+        Assertions.assertTrue(schema.isValid(number10));
         Assertions.assertFalse(schema.isValid("5"));
 
-        Assertions.assertTrue(schema.positive().isValid(number_10));
-        Integer number__10 = -10;
-        Assertions.assertFalse(schema.isValid(number__10));
+        Assertions.assertTrue(schema.positive().isValid(number10));
+        Assertions.assertFalse(schema.isValid(numberMinus10));
 
-        Integer number_5 = 5;
-        schema.range(number_5, number_10);
+        schema.range(number5, number10);
 
-        Integer number_6 = 6;
-        Assertions.assertTrue(schema.positive().isValid(number_6));
-        Assertions.assertTrue(schema.isValid(number_5));
-        Assertions.assertTrue(schema.isValid(number_10));
-        Integer number_4 = 4;
-        Assertions.assertFalse(schema.isValid(number_4));
-        Integer number_11 = 11;
-        Assertions.assertFalse(schema.isValid(number_11));
+        Assertions.assertTrue(schema.positive().isValid(number6));
+        Assertions.assertTrue(schema.isValid(number5));
+        Assertions.assertTrue(schema.isValid(number10));
+        Assertions.assertFalse(schema.isValid(number4));
+        Assertions.assertFalse(schema.isValid(number11));
     }
 }

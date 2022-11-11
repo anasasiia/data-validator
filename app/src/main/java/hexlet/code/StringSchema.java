@@ -15,7 +15,6 @@ public final class StringSchema extends BaseSchema<String> {
     public StringSchema() {
     }
 
-    @Override
     public boolean isValid(Object string) {
         if (isRequiredMode()) {
             buildValidationsString();
@@ -31,13 +30,13 @@ public final class StringSchema extends BaseSchema<String> {
 
     public StringSchema contains(String str) {
         Predicate<Object> containsStr = content -> String.valueOf(content).contains(str);
-        validations.add(containsStr);
+        addInValidations(containsStr);
         return this;
     }
 
     public StringSchema minLength(int length) {
         Predicate<Object> minLength = content -> String.valueOf(content).length() >= length;
-        validations.add(minLength);
+        addInValidations(minLength);
         return this;
     }
 

@@ -17,11 +17,10 @@ public final class NumberSchema extends BaseSchema<Integer> {
 
     public NumberSchema positive() {
         Predicate<Object> isPositive = num -> (Integer) num > 0;
-        validations.add(isPositive);
+        addInValidations(isPositive);
         return this;
     }
 
-    @Override
     public boolean isValid(Object integer) {
         if (isRequiredMode()) {
             buildValidationsInteger();
@@ -38,7 +37,7 @@ public final class NumberSchema extends BaseSchema<Integer> {
 
     public void range(Integer firstNumber, Integer secondNumber) {
         Predicate<Object> isBetweenNumber = num -> (Integer) num >= firstNumber && (Integer) num <= secondNumber;
-        validations.add(isBetweenNumber);
+        addInValidations(isBetweenNumber);
     }
 
     public void buildValidationsInteger() {

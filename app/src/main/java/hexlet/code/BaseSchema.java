@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public abstract class BaseSchema<T> {
-    protected T object;
-    protected boolean requiredMode = false;
-    protected final List<Predicate<Object>> validations = new ArrayList<>();
+class BaseSchema<T> implements Schema {
+    private boolean requiredMode = false;
+    private final List<Predicate<Object>> validations = new ArrayList<>();
+
+    public void addInValidations(Predicate<Object> predicate) {
+        validations.add(predicate);
+    }
 
     public List<Predicate<Object>> getValidations() {
         return validations;
@@ -18,15 +21,7 @@ public abstract class BaseSchema<T> {
     }
 
     public void setRequiredMode(boolean newRequiredMode) {
-        this.requiredMode = newRequiredMode;
-    }
-
-    public T getObject() {
-        return object;
-    }
-
-    public void setObject(T object) {
-        this.object = object;
+        requiredMode = newRequiredMode;
     }
 
     public void required() {
@@ -34,9 +29,8 @@ public abstract class BaseSchema<T> {
     }
 
     public boolean isValid(Object object) {
-        setObject((T) object);
         for (Predicate<Object> validation : getValidations()) {
-            if (!validation.test(getObject())) {
+            if (!validation.test(object)) {
                 return false;
             }
         }

@@ -31,7 +31,7 @@ public final class NumberSchema extends BaseSchema<Integer> {
     public void isCorrectType() {
         addInValidationsDataType(Integer.class::isInstance);
         if (isPositive()) {
-            addInValidations(obj -> obj % 2 == 0);
+            addInValidations(obj -> obj > 0);
         }
     }
 

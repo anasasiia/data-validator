@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class NumberSchemaTest {
     private final Integer number10 = 10;
-    private final Integer number5 = 5;
+    private final Integer number8 = 8;
     private final Integer numberMinus10 = -10;
     private final Integer number6 = 6;
     private final Integer number4 = 4;
@@ -26,10 +26,10 @@ public class NumberSchemaTest {
         Assertions.assertTrue(schema.positive().isValid(number10));
         Assertions.assertFalse(schema.isValid(numberMinus10));
 
-        schema.range(number5, number10);
+        schema.range(number6, number10);
 
         Assertions.assertTrue(schema.positive().isValid(number6));
-        Assertions.assertTrue(schema.isValid(number5));
+        Assertions.assertTrue(schema.isValid(number8));
         Assertions.assertTrue(schema.isValid(number10));
         Assertions.assertFalse(schema.isValid(number4));
         Assertions.assertFalse(schema.isValid(number11));

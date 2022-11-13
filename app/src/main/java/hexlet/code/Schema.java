@@ -1,6 +1,6 @@
 package hexlet.code;
 
 public interface Schema {
-    void required();
+    BaseSchema required();
     boolean isValid(Object object);
 }

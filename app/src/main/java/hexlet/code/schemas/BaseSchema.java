@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public abstract class BaseSchema<T> implements Schema {
+public abstract class BaseSchema<T> {
     private boolean required = false;
     private final List<Predicate<T>> validations = new ArrayList<>();
     private final List<Predicate<Object>> validationsDataType = new ArrayList<>();

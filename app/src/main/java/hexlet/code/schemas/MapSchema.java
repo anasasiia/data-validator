@@ -1,6 +1,7 @@
 package hexlet.code.schemas;
 
 import java.util.Map;
+import java.util.Objects;
 
 public final class MapSchema extends BaseSchema<Map<Object, Object>> {
     public MapSchema() {
@@ -16,6 +17,7 @@ public final class MapSchema extends BaseSchema<Map<Object, Object>> {
 
     public MapSchema required() {
         setRequired();
+        addInValidations(Objects::nonNull);
         return this;
     }
 

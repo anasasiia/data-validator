@@ -1,5 +1,7 @@
 package hexlet.code.schemas;
 
+import java.util.Objects;
+
 public final class NumberSchema extends BaseSchema<Integer> {
     private boolean isPositive = false;
 
@@ -22,6 +24,7 @@ public final class NumberSchema extends BaseSchema<Integer> {
 
     public NumberSchema required() {
         setRequired();
+        addInValidations(Objects::nonNull);
         return this;
     }
 

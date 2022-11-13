@@ -1,11 +1,11 @@
-package hexlet.code;
+package hexlet.code.schemas;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-abstract class BaseSchema<T> implements Schema {
+public abstract class BaseSchema<T> implements Schema {
     private boolean required = false;
     private final List<Predicate<T>> validations = new ArrayList<>();
     private final List<Predicate<Object>> validationsDataType = new ArrayList<>();

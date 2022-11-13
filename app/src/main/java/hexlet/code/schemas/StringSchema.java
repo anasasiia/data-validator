@@ -1,10 +1,10 @@
-package hexlet.code;
+package hexlet.code.schemas;
 
 import java.util.Objects;
 
-final class StringSchema extends BaseSchema<String> {
+public final class StringSchema extends BaseSchema<String> {
 
-    StringSchema() {
+    public StringSchema() {
     }
 
     public void isCorrectType() {

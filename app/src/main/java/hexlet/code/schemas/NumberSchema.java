@@ -1,6 +1,6 @@
-package hexlet.code;
+package hexlet.code.schemas;
 
-final class NumberSchema extends BaseSchema<Integer> {
+public final class NumberSchema extends BaseSchema<Integer> {
     private boolean isPositive = false;
 
     public boolean isPositive() {
@@ -11,7 +11,7 @@ final class NumberSchema extends BaseSchema<Integer> {
         this.isPositive = true;
     }
 
-    NumberSchema() {
+    public NumberSchema() {
     }
 
     public NumberSchema positive() {

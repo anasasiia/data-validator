@@ -1,9 +1,9 @@
-package hexlet.code;
+package hexlet.code.schemas;
 
 import java.util.Map;
 
-final class MapSchema extends BaseSchema<Map<Object, Object>> {
-    MapSchema() {
+public final class MapSchema extends BaseSchema<Map<Object, Object>> {
+    public MapSchema() {
     }
 
     public void isCorrectType() {

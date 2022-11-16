@@ -7,22 +7,23 @@ public final class MapSchema extends BaseSchema<Map<Object, Object>> {
     public MapSchema() {
     }
 
-    public void isCorrectType() {
-        addInValidationsDataType(Map.class::isInstance);
-    }
-
     public void sizeof(Integer size) {
-        addInValidations(map -> map.size() == size);
+        if (getInput() instanceof Map<?, ?>) {
+            addInValidations(map -> {
+                Map<?, ?> inputMap = (Map<?, ?>) map;
+                return inputMap.size() == size;
+            });
+        }
     }
 
     public MapSchema required() {
-        setRequired();
         addInValidations(Objects::nonNull);
+        addInValidations(Map.class::isInstance);
         return this;
     }
 
     public void shape(Map<String, BaseSchema> newShape) {
-        addInValidations(map -> checkShape(map, newShape));
+        addInValidations(map -> checkShape((Map<?, ?>) map, newShape));
     }
 
     private boolean checkShape(Map<?, ?> map, Map<String, BaseSchema> newShape) {

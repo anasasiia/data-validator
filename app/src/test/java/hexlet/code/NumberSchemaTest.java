@@ -25,7 +25,7 @@ public class NumberSchemaTest {
         Assertions.assertFalse(schema.isValid("5"));
 
         Assertions.assertTrue(schema.positive().isValid(number10));
-        Assertions.assertFalse(schema.isValid(numberMinus10));
+        Assertions.assertFalse(schema.positive().isValid(numberMinus10));
 
         schema.range(number5, number10);
 

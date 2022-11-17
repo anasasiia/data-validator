@@ -8,21 +8,20 @@ public final class MapSchema extends BaseSchema<Map<Object, Object>> {
     }
 
     public void sizeof(Integer size) {
-        addInValidations(map -> {
+        addInValidations("sizeof", map -> {
             Map<?, ?> inputMap = (Map<?, ?>) map;
             return inputMap.size() == size;
         });
     }
 
     public MapSchema required() {
-        setRequired();
-        addInValidations(Objects::nonNull);
-        addInValidations(Map.class::isInstance);
+        addInValidations("notNull", Objects::nonNull);
+        addInValidations("isMap", Map.class::isInstance);
         return this;
     }
 
     public void shape(Map<String, BaseSchema> newShape) {
-        addInValidations(map -> checkShape((Map<?, ?>) map, newShape));
+        addInValidations("checkShape", map -> checkShape((Map<?, ?>) map, newShape));
     }
 
     private boolean checkShape(Map<?, ?> map, Map<String, BaseSchema> newShape) {

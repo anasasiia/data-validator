@@ -8,18 +8,18 @@ public final class NumberSchema extends BaseSchema<Integer> {
     }
 
     public NumberSchema positive() {
-        addInValidations(num -> num == null || (Integer) num > 0);
+        addInValidations("notString", num -> num == null || num instanceof Integer);
+        addInValidations("positive", num -> num == null || (Integer) num > 0);
         return this;
     }
 
     public NumberSchema required() {
-        setRequired();
-        addInValidations(Objects::nonNull);
-        addInValidations(Integer.class::isInstance);
+        addInValidations("notNull", Objects::nonNull);
+        addInValidations("isInteger", Integer.class::isInstance);
         return this;
     }
 
     public void range(Integer min, Integer max) {
-        addInValidations(num -> (Integer) num >= min && (Integer) num <= max);
+        addInValidations("range", num -> (Integer) num >= min && (Integer) num <= max);
     }
 }

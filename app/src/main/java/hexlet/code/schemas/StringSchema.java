@@ -8,23 +8,20 @@ public final class StringSchema extends BaseSchema<String> {
     }
 
     public StringSchema required() {
-        addInValidations(Objects::nonNull);
-        addInValidations(String.class::isInstance);
-        addInValidations(input -> !Objects.equals(input, ""));
+        setRequired();
+        addInValidationsDataType(Objects::nonNull);
+        addInValidationsDataType(String.class::isInstance);
+        addInValidationsDataType(input -> !Objects.equals(input, ""));
         return this;
     }
 
     public StringSchema contains(String str) {
-        if (getInput() instanceof String && !Objects.equals(getInput(), "")) {
-            addInValidations(content -> String.valueOf(content).contains(str));
-        }
+        addInValidations(content -> String.valueOf(content).contains(str));
         return this;
     }
 
     public StringSchema minLength(int length) {
-        if (getInput() instanceof String) {
-            addInValidations(content -> String.valueOf(content).length() >= length);
-        }
+        addInValidations(content -> String.valueOf(content).length() >= length);
         return this;
     }
 }

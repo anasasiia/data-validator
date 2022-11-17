@@ -13,14 +13,13 @@ public final class NumberSchema extends BaseSchema<Integer> {
     }
 
     public NumberSchema required() {
-        addInValidations(Objects::nonNull);
-        addInValidations(Integer.class::isInstance);
+        setRequired();
+        addInValidationsDataType(Objects::nonNull);
+        addInValidationsDataType(Integer.class::isInstance);
         return this;
     }
 
     public void range(Integer min, Integer max) {
-        if (getInput() instanceof Integer) {
-            addInValidations(num -> (Integer) num >= min && (Integer) num <= max);
-        }
+        addInValidations(num -> (Integer) num >= min && (Integer) num <= max);
     }
 }

@@ -14,8 +14,8 @@ public final class NumberSchema extends BaseSchema<Integer> {
 
     public NumberSchema required() {
         setRequired();
-        addInValidationsDataType(Objects::nonNull);
-        addInValidationsDataType(Integer.class::isInstance);
+        addInValidations(Objects::nonNull);
+        addInValidations(Integer.class::isInstance);
         return this;
     }
 

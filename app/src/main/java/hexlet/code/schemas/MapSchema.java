@@ -16,8 +16,8 @@ public final class MapSchema extends BaseSchema<Map<Object, Object>> {
 
     public MapSchema required() {
         setRequired();
-        addInValidationsDataType(Objects::nonNull);
-        addInValidationsDataType(Map.class::isInstance);
+        addInValidations(Objects::nonNull);
+        addInValidations(Map.class::isInstance);
         return this;
     }
 

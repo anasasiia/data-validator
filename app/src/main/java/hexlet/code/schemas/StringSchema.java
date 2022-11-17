@@ -9,9 +9,9 @@ public final class StringSchema extends BaseSchema<String> {
 
     public StringSchema required() {
         setRequired();
-        addInValidationsDataType(Objects::nonNull);
-        addInValidationsDataType(String.class::isInstance);
-        addInValidationsDataType(input -> !Objects.equals(input, ""));
+        addInValidations(Objects::nonNull);
+        addInValidations(String.class::isInstance);
+        addInValidations(input -> !Objects.equals(input, ""));
         return this;
     }
 

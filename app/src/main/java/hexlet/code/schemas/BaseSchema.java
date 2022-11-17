@@ -5,9 +5,13 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public abstract class BaseSchema<T> {
-//    private Object input;
+    private Object input;
     private final List<Predicate<Object>> validations = new ArrayList<>();
     private final List<Predicate<Object>> validationsDataType = new ArrayList<>();
+
+    public final Object getInput() {
+        return input;
+    }
 
     public final List<Predicate<Object>> getValidationsDataType() {
         return validationsDataType;
@@ -40,12 +44,7 @@ public abstract class BaseSchema<T> {
     public abstract BaseSchema<T> required();
 
     public final boolean isValid(Object object) {
- //       this.input = object;
-        if (isRequired()) {
-            if (!getValidationsDataType().stream().allMatch(validation -> validation.test(object))) {
-                return false;
-            }
-        }
+        this.input = object;
         return getValidations().stream().allMatch(validation -> validation.test(object));
     }
 }

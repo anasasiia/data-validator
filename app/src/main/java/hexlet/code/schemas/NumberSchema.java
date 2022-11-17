@@ -8,7 +8,12 @@ public final class NumberSchema extends BaseSchema<Integer> {
     }
 
     public NumberSchema positive() {
-        addInValidations(num -> num == null || (Integer) num > 0);
+        if (getInput() == null) {
+            addInValidations(Objects::isNull);
+        }
+        if (getInput() instanceof Integer) {
+            addInValidations(num -> (Integer) num > 0);
+        }
         return this;
     }
 
@@ -20,6 +25,8 @@ public final class NumberSchema extends BaseSchema<Integer> {
     }
 
     public void range(Integer min, Integer max) {
-        addInValidations(num -> (Integer) num >= min && (Integer) num <= max);
+        if (getInput() instanceof Integer) {
+            addInValidations(num -> (Integer) num >= min && (Integer) num <= max);
+        }
     }
 }

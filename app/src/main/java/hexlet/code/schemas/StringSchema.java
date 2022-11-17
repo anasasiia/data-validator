@@ -15,16 +15,12 @@ public final class StringSchema extends BaseSchema<String> {
     }
 
     public StringSchema contains(String str) {
-        if (getInput() instanceof String) {
-            addInValidations(content -> String.valueOf(content).contains(str));
-        }
+        addInValidations(content -> String.valueOf(content).contains(str));
         return this;
     }
 
     public StringSchema minLength(int length) {
-        if (getInput() instanceof String) {
-            addInValidations(content -> String.valueOf(content).length() >= length);
-        }
+        addInValidations(content -> String.valueOf(content).length() >= length);
         return this;
     }
 }

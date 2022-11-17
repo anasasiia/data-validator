@@ -7,14 +7,9 @@ import java.util.function.Predicate;
 public abstract class BaseSchema<T> {
     private Object input;
     private final List<Predicate<Object>> validations = new ArrayList<>();
-    private final List<Predicate<Object>> validationsDataType = new ArrayList<>();
 
     public final Object getInput() {
         return input;
-    }
-
-    public final List<Predicate<Object>> getValidationsDataType() {
-        return validationsDataType;
     }
 
     private boolean required = false;
@@ -26,12 +21,6 @@ public abstract class BaseSchema<T> {
     public final void setRequired() {
         this.required = true;
     }
-/*
-    public final void addInValidationsDataType(Predicate<Object> predicate) {
-        validationsDataType.add(predicate);
-    }
-
- */
 
     public final void addInValidations(Predicate<Object> predicate) {
         validations.add(predicate);

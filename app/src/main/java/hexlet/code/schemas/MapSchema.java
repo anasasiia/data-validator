@@ -4,9 +4,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public final class MapSchema extends BaseSchema<Map<Object, Object>> {
-    public MapSchema() {
-    }
-
     public void sizeof(Integer size) {
         addInValidations("sizeof", map -> {
             Map<?, ?> inputMap = (Map<?, ?>) map;

@@ -3,10 +3,6 @@ package hexlet.code.schemas;
 import java.util.Objects;
 
 public final class StringSchema extends BaseSchema<String> {
-
-    public StringSchema() {
-    }
-
     public StringSchema required() {
         addInValidations("notNull", Objects::nonNull);
         addInValidations("isString", String.class::isInstance);

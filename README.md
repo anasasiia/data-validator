@@ -3,3 +3,18 @@
 
 ### Description
 Data validator is a library with which you can check the correctness of any data. The yup library is taken as the basis for the project.
+```
+Validator v = new Validator();
+
+// строки
+StringSchema schema = v.string().required();
+
+schema.isValid("validator is cool"); // true
+schema.isValid(""); // false
+
+// числа
+NumberSchema schema = v.number().required().positive();
+
+schema.isValid(-5); // false
+schema.isValid(5); // true
+```
